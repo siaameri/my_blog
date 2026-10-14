@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+const { frontmatter } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{frontmatter.title} | یادداشت‌های ابوالفضل عرب عامری</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="/" class="site-title">حاشیه‌نویسی</a>
+        <span class="site-tagline">جستارهایی در باب کتاب، کار و شیوهٔ زیستن</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/">جستارها</a>
+        <a href="#">درباره</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="editorial-container">
+    <article>
+      <header class="essay-header">
+        <div class="essay-meta">
+          <span class="meta-tag">{frontmatter.category || 'جستار'}</span>
+          <span>/</span>
+          <time>{frontmatter.date}</time>
+        </div>
+        <h1 class="essay-title">{frontmatter.title}</h1>
+        {frontmatter.description && <p class="essay-lead">{frontmatter.description}</p>}
+      </header>
+
+      <section class="essay-content">
+        <slot />
+      </section>
+
+      <footer class="essay-footer">
+        <div class="author-signature">
+          <span class="author-name">ابوالفضل عرب عامری</span>
+          <span class="author-desc">یادداشت‌هایی در باب سیستم‌ها، نقد کتاب و تجربهٔ زیسته</span>
+        </div>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>متن‌ها متعلق به نویسنده‌اند. استفاده با ذکر منبع آزاد است.</span>
+  </footer>
+</body>
+</html>
