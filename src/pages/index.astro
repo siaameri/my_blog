@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+const posts = await Astro.glob('./posts/*.md');
+posts.sort((a, b) => new Date(b.frontmatter.dateIso || '2026-01-01').getTime() - new Date(a.frontmatter.dateIso || '2026-01-01').getTime());
+---
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاشیه‌نویسی | یادداشت‌های ابوالفضل عرب عامری</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="/" class="site-title">حاشیه‌نویسی</a>
+        <span class="site-tagline">جستارهایی در باب کتاب، کار و شیوهٔ زیستن</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/" class="active">جستارها</a>
+        <a href="#">درباره</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="editorial-container">
+    <ul class="posts-list">
+      {posts.map(post => (
+        <li class="post-item">
+          <a href={post.url} class="post-link">
+            <h2 class="post-item-title">{post.frontmatter.title}</h2>
+            <p class="post-item-desc">{post.frontmatter.description}</p>
+            <span class="post-item-date">{post.frontmatter.date}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <span>حاشیه‌نویسی | ابوالفضل عرب عامری</span>
+  </footer>
+</body>
+</html>
